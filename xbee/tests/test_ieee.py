@@ -512,10 +512,10 @@ class TestReadFromDevice(unittest.TestCase):
         expected_info = {
             'id'              :'rx_pro',
             'frame_id'        :'\x00',
-            'source_addr_long':'\x13\xa2\x00\x40\x78\xcd\x39\xff',
-            'reserved'        :'\xfe\x02',
-            'rx_opt'          :'\x00',
-            'rf_data'         :'\x0f\x0e/AccelX\x00\x00\x00\x00\x00\x00\xc0L?AccelY\x00\x00\x00\x00\x00\x00\xc0L?AccelZ\x00\x00\x00\x00\x00\x00\xc0L?Yaw\x00\x00\x00\x00\x00\x00\x00\x00\x00\xc0L?'
+            'source_addr_long':'\x13\xa2\x00\x40\x78\xcd\x39',
+            'reserved'        :'\xff\xfe',
+            'rx_opt'          :'\x02',
+            'rf_data'         :'\x00\x0f\x0e/AccelX\x00\x00\x00\x00\x00\x00\xc0L?AccelY\x00\x00\x00\x00\x00\x00\xc0L?AccelZ\x00\x00\x00\x00\x00\x00\xc0L?Yaw\x00\x00\x00\x00\x00\x00\x00\x00\x00\xc0L?'
         }
 
         self.maxDiff = None

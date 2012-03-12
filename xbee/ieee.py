@@ -127,7 +127,7 @@ class XBee(XBeeBase):
                         {'name':'rx_pro',
                          'structure':
                             [{'name':'frame_id',         'len':1},
-                             {'name':'source_addr_long', 'len':8},
+                             {'name':'source_addr_long', 'len':7},
                              {'name':'reserved',         'len':2},
                              {'name':'rx_opt',           'len':1},
                              {'name':'rf_data',          'len':None}]},
