@@ -123,6 +123,14 @@ class XBee(XBeeBase):
                              {'name':'command',     'len':2},
                              {'name':'status',      'len':1},
                              {'name':'parameter',   'len':None}]},
+                     "\x90":
+                        {'name':'rx_pro',
+                         'structure':
+                            [{'name':'frame_id',         'len':1},
+                             {'name':'source_addr_long', 'len':8},
+                             {'name':'reserved',         'len':2},
+                             {'name':'rx_opt',           'len':1},
+                             {'name':'rf_data',          'len':None}]},
                      "\x97":
                         {'name':'remote_at_response',
                          'structure':

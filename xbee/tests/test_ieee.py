@@ -489,6 +489,38 @@ class TestReadFromDevice(unittest.TestCase):
     XBee class should properly read and parse binary data from a serial 
     port device.
     """
+    def test_read_90(self):
+        """
+        Read and parse an RX packet from an XBee-Pro 900MHz module.
+        """
+        data = \
+            '\x7e' + \
+            '\x00\x4c' + \
+            '\x90' + \
+            '\x00' + \
+            '}3\xa2\x00@x\xcd9' + \
+            '\xff\xfe' + \
+            '\x02' + \
+            '\x00\x0f\x0e/AccelX\x00\x00\x00\x00\x00\x00\xc0L?AccelY\x00\x00\x00\x00\x00\x00\xc0L?AccelZ\x00\x00\x00\x00\x00\x00\xc0L?Yaw\x00\x00\x00\x00\x00\x00\x00\x00\x00\xc0L' + \
+            'c'
+
+        device = FakeReadDevice(data)
+        xbee = XBee(device)
+        
+        info = xbee.wait_read_frame()
+        expected_info = {
+            'id':'rx_pro',
+            'frame_id':'\x00',
+            'source_addr_long': '\x7d\x33\xa2\x00\x40\x78\xcd\x39',
+            'reserved': '\xff\xfe',
+            'rx_opt': '\x02',
+            'rf_data':'\x00\x0f\x0e/AccelX\x00\x00\x00\x00\x00\x00\xc0L?AccelY\x00\x00\x00\x00\x00\x00\xc0L?AccelZ\x00\x00\x00\x00\x00\x00\xc0L?Yaw\x00\x00\x00\x00\x00\x00\x00\x00\x00\xc0L'
+        }
+
+        self.maxDiff = None
+        self.assertEqual(info, expected_info)
+        
+
     def test_read_at(self):
         """
         read and parse a parameterless AT command
