@@ -489,39 +489,6 @@ class TestReadFromDevice(unittest.TestCase):
     XBee class should properly read and parse binary data from a serial 
     port device.
     """
-    def test_read_90(self):
-        """
-        Read and parse an RX packet from an XBee-Pro 900MHz module.
-        """
-        data = '~\x00L\x90\x00}3\xa2\x00@x\xcd9\xff\xfe\x02\x00\x0f\x0e/AccelX\x00\x00\x00\x00\x00\x00\xc0L?AccelY\x00\x00\x00\x00\x00\x00\xc0L?AccelZ\x00\x00\x00\x00\x00\x00\xc0L?Yaw\x00\x00\x00\x00\x00\x00\x00\x00\x00\xc0L?\xc1'
-
-        device = FakeReadDevice(data)
-        xbee = XBee(device, escaped=True)
-        
-        info = xbee.wait_read_frame()
-
-        # import pprint
-        # pprint.pprint(info)
-        ## {'frame_id': '\x00',
-        ##  'id': 'rx_pro',
-        ##  'reserved': '\xfe\x02',
-        ##  'rf_data': '\x0f\x0e/AccelX\x00\x00\x00\x00\x00\x00\xc0L?AccelY\x00\x00\x00\x00\x00\x00\xc0L?AccelZ\x00\x00\x00\x00\x00\x00\xc0L?Yaw\x00\x00\x00\x00\x00\x00\x00\x00\x00\xc0L?',
-        ##  'rx_opt': '\x00',
-        ##  'source_addr_long': '\x13\xa2\x00@x\xcd9\xff'}
-
-        expected_info = {
-            'id'              :'rx_pro',
-            'frame_id'        :'\x00',
-            'source_addr_long':'\x13\xa2\x00\x40\x78\xcd\x39',
-            'reserved'        :'\xff\xfe',
-            'rx_opt'          :'\x02',
-            'rf_data'         :'\x00\x0f\x0e/AccelX\x00\x00\x00\x00\x00\x00\xc0L?AccelY\x00\x00\x00\x00\x00\x00\xc0L?AccelZ\x00\x00\x00\x00\x00\x00\xc0L?Yaw\x00\x00\x00\x00\x00\x00\x00\x00\x00\xc0L?'
-        }
-
-        self.maxDiff = None
-        self.assertEqual(info, expected_info)
-        
-
     def test_read_at(self):
         """
         read and parse a parameterless AT command
